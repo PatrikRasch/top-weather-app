@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>Rasch Weather</title>
+    <link rel="icon" href="images/weather-favicon-64px.png" />
+  </head>
+  <body>
+    <div class="mainContentContainer">
+      <div class="mainContent">
+        <div class="searchContent">
+          <input type="text" id="search" />
+          <button id="searchButton">Search</button>
+        </div>
+        <div class="displayWeatherContent">
+          <div class="displayWeatherDescription"></div>
+          <div class="displayWeatherTemperature"></div>
+          <div class="weatherImages">
+            <img src="images/weather-cloud.png" alt="" class="weatherIcon clouds hidden" />
+            <img src="images/weather-rain.png" alt="" class="weatherIcon rain hidden" />
+            <img src="images/weather-sun.png" alt="" class="weatherIcon clear hidden" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
