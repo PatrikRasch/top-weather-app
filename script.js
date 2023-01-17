@@ -24,6 +24,7 @@ const getWeather = async (placeWeather) => {
       }
     );
     let data = await result.json();
+    // if (!data) throw new Error("Data is undefined/null");
     getWeatherTemperature(data);
     updateWeatherText(data);
     getWeatherFeelsLike(data);
@@ -31,6 +32,7 @@ const getWeather = async (placeWeather) => {
     updateCity(placeWeather);
   } catch (error) {
     console.log("IST EINE ERROR " + error);
+    placeDontExist();
   }
 };
 
@@ -104,6 +106,14 @@ const updateCity = (search) => {
   bottomCity.textContent = search;
 };
 
-unit.addEventListener("click", (e) => {
-  showCelsius = false;
-});
+const placeDontExist = () => {
+  bottomCity.textContent = "Doesn't Exist";
+  displayWeatherTemperature.textContent = "🤢";
+  displayWeatherDescription.textContent = "Death";
+  bottomFeelsLike.textContent = "Feels like 💀";
+  bottomHumidity.textContent = "Humidity: no";
+};
+
+// unit.addEventListener("click", (e) => {
+//   showCelsius = false;
+// });
