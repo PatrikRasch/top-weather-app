@@ -10,21 +10,41 @@
     <link rel="icon" href="images/weather-favicon-64px.png" />
   </head>
   <body>
-    <div class="mainContentContainer">
-      <div class="mainContent">
-        <div class="searchContent">
-          <input type="text" id="search" />
-          <button id="searchButton">Search</button>
+    <div class="container">
+      <div class="topContent">
+        <div class="topHeader">Weather Search</div>
+        <div class="topSearch">
+          <input type="text" class="search" placeholder="Your City Here" />
+          <div class="topSearchButtonIconWrapper">
+            <img src="images/search-icon.png" alt="" class="topSearchButtonIcon" />
+          </div>
+          <div class="topSearchLine"></div>
+          <!-- <button class="topSearchButton">Search</button> -->
         </div>
-        <div class="displayWeatherContent">
-          <div class="displayWeatherDescription"></div>
+      </div>
+
+      <div class="bottomContent">
+        <div class="bottomCity">City name</div>
+        <div class="bottomTemperature">
           <div class="displayWeatherTemperature"></div>
+        </div>
+        <div class="bottomWeather">
+          <div class="displayWeatherDescription"></div>
           <div class="weatherImages">
             <img src="images/weather-cloud.png" alt="" class="weatherIcon clouds hidden" />
             <img src="images/weather-rain.png" alt="" class="weatherIcon rain hidden" />
             <img src="images/weather-sun.png" alt="" class="weatherIcon clear hidden" />
+            <img src="images/weather-snow2.png" alt="" class="weatherIcon snow hidden" />
           </div>
         </div>
+        <div class="bottomExtraInformation">
+          <div class="bottomFeelsLike"></div>
+          <div class="divisor"></div>
+          <div class="bottomHumidity"></div>
+        </div>
+        <!-- <div class="unitWrapper">
+          <div class="unit">C°</div>
+        </div> -->
       </div>
     </div>
   </body>

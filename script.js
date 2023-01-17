@@ -3,10 +3,17 @@ const displayWeatherTemperature = document.querySelector(".displayWeatherTempera
 const clouds = document.querySelector(".clouds");
 const clear = document.querySelector(".clear");
 const rain = document.querySelector(".rain");
-const search = document.getElementById("search");
-const searchButton = document.getElementById("searchButton");
+const snow = document.querySelector(".snow");
+const search = document.querySelector(".search");
+const topSearchButtonIcon = document.querySelector(".topSearchButtonIcon");
+const topSearchButtonIconWrapper = document.querySelector(".topSearchButtonIconWrapper");
+const bottomCity = document.querySelector(".bottomCity");
+const bottomFeelsLike = document.querySelector(".bottomFeelsLike");
+const bottomHumidity = document.querySelector(".bottomHumidity");
+const unit = document.querySelector(".unit");
 
-let weatherTypes = [clear, clouds, rain];
+let weatherTypes = [clear, clouds, rain, snow];
+let showCelsius = true;
 
 const getWeather = async (placeWeather) => {
   try {
@@ -19,18 +26,30 @@ const getWeather = async (placeWeather) => {
     let data = await result.json();
     getWeatherTemperature(data);
     updateWeatherText(data);
+    getWeatherFeelsLike(data);
+    getWeatherHumidity(data);
+    updateCity(placeWeather);
   } catch (error) {
     console.log("IST EINE ERROR " + error);
   }
 };
 
-getWeather("wellington");
+getWeather("Wellington");
 
-searchButton.addEventListener("click", (e) => {
+topSearchButtonIconWrapper.addEventListener("click", (e) => {
   if (search.value === "") {
     return alert("Can't search empty");
   } else {
     getWeather(search.value.toString());
+    searchIconAnimations();
+  }
+});
+
+// If enter is pressed while in the search field, search.
+search.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    getWeather(search.value);
+    searchIconAnimations();
   }
 });
 
@@ -43,7 +62,16 @@ const updateWeatherText = (data) => {
 
 // Sets the temperature (from kelvin to celsius)
 const getWeatherTemperature = (data) => {
-  displayWeatherTemperature.textContent = (data.main.temp - 273.15).toFixed(0) + " degrees celsius";
+  displayWeatherTemperature.textContent = (data.main.temp - 273.15).toFixed(0) + " °C";
+  // displayWeatherTemperature.textContent = (1.8 * (data.main.temp - 273) + 32).toFixed(0) + " °F"; fahrenheit
+};
+
+const getWeatherFeelsLike = (data) => {
+  bottomFeelsLike.textContent = "Feels like " + (data.main.feels_like - 273.15).toFixed(0) + " °C";
+};
+
+const getWeatherHumidity = (data) => {
+  bottomHumidity.textContent = "Humidity: " + data.main.humidity;
 };
 
 // Loops over the weatherTypes array and checks if the weather argument matches any of our classes
@@ -57,7 +85,25 @@ const displayWeatherIcon = (weather) => {
   });
 };
 
+// Add classes for search icon animations and remove them after a 1.5 second delay.
+const searchIconAnimations = () => {
+  topSearchButtonIconWrapper.classList.add("topSearchButtonRotate");
+  setTimeout(() => {
+    topSearchButtonIconWrapper.classList.add("fade");
+    topSearchButtonIconWrapper.classList.remove("topSearchButtonRotate");
+  }, 1500);
+  topSearchButtonIconWrapper.classList.remove("fade");
+};
+
 // Hides all weather icons in order to "reset" all the elements
 const hideAllWeatherIcons = () => {
   weatherTypes.forEach((element) => element.classList.add("hidden"));
 };
+
+const updateCity = (search) => {
+  bottomCity.textContent = search;
+};
+
+unit.addEventListener("click", (e) => {
+  showCelsius = false;
+});
