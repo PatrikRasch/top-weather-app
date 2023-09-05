@@ -11,6 +11,7 @@ const bottomCity = document.querySelector(".bottomCity");
 const bottomFeelsLike = document.querySelector(".bottomFeelsLike");
 const bottomHumidity = document.querySelector(".bottomHumidity");
 const unit = document.querySelector(".unit");
+const weatherImages = document.querySelector(".weatherImages");
 
 let weatherTypes = [clear, clouds, rain, snow];
 let showCelsius = true;
@@ -24,6 +25,7 @@ const getWeather = async (placeWeather) => {
       }
     );
     let data = await result.json();
+    weatherImages.classList.remove("hidden");
     // if (!data) throw new Error("Data is undefined/null");
     getWeatherTemperature(data);
     updateWeatherText(data);
@@ -107,11 +109,15 @@ const updateCity = (search) => {
 };
 
 const placeDontExist = () => {
-  bottomCity.textContent = "Doesn't Exist";
-  displayWeatherTemperature.textContent = "🤢";
-  displayWeatherDescription.textContent = "Death";
-  bottomFeelsLike.textContent = "Feels like 💀";
-  bottomHumidity.textContent = "Humidity: no";
+  bottomCity.textContent = "Could not find place";
+  displayWeatherTemperature.textContent = "N/A";
+  displayWeatherDescription.textContent = "N/A";
+  bottomFeelsLike.textContent = "N/A";
+  bottomHumidity.textContent = "Humidity: N/A";
+  weatherTypes.forEach((element) => {
+    element.classList.add("hidden");
+  });
+  weatherImages.classList.add("hidden");
 };
 
 // unit.addEventListener("click", (e) => {
